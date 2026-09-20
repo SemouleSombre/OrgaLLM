@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "OrgaLLM"
+version = "0.1.0"
+description = "Permet d'organiser mes LLM"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Semoule", email = "semoule@example.com"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.25.0",  # Exemple de dépendance
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/semoule/mon-module"
+Documentation = "https://github.com/semoule/mon-module#readme"
+Repository = "https://github.com/semoule/mon-module.git"
+Issues = "https://github.com/semoule/mon-module/issues"
