@@ -32,12 +32,12 @@ class StructuredData(BaseModel):
     def get_type(self) -> TypeData:
         return self.type
     
-    def __init__(self, parser:Union[str, Dict[str,str]]) -> None:
-        if not parser:
+    def __init__(self, format:Union[str, Dict[str,str]]) -> None:
+        if not format:
             raise ValueError
-        elif type(parser) == str:
+        elif type(format) == str:
             "cas str"
-        elif type(parser) == dict:
+        elif type(format) == dict:
             "cas dict"
         else:
             raise ValueError
