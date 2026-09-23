@@ -41,4 +41,4 @@ class LLMAgent(BaseAgent):
     
 class LLMAgentStructured(LLMAgent):
     type: TypeAgent = TypeAgent.LLMStructured
-    parser: StructuredData = Field(..., description="Parser de réponse de l'assistant")
+    parser: StructuredData = Field(..., description="Parser (Format de sortie) de réponse de l'assistant")
