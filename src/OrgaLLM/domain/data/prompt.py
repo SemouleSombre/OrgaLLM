@@ -6,7 +6,7 @@ from pydantic import BaseModel
 logger = logging.getLogger(__name__)
 
 def extract_variables(prompt:str) -> List[str]:
-    return re.findall(r'\{(.*?)\}', prompt)
+    return re.findall(r'\{([a-zA-Z]+[a-zA-Z1-9]*?)\}', prompt)
 
 class Prompt(BaseModel):
     prompt_system:str
@@ -40,7 +40,7 @@ class Prompt(BaseModel):
             for v in variable_not_selected:
                 metadata[v] = ""
         
-        return prompt
+        return prompt.format(**metadata)
     
     
     

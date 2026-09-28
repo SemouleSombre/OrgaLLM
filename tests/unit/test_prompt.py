@@ -11,7 +11,8 @@ from src.OrgaLLM.domain.data.prompt import Prompt, extract_variables
     ("{Var1} {Var2} {Var1}", ["Var1", "Var2"]),
     ("\{Apport\} Journalier", []),
     ("{Avec Espace}", []),
-    ("{123quicommenceparchiffres}", [])
+    ("{123quicommenceparchiffres}", []),
+    ("{quifinitpardeschiffres123}", ["quifinitpardeschiffres123"])
 ])
 def test_extract_variables_valid_cases(prompt, expected):
     assert extract_variables(prompt) == expected

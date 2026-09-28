@@ -12,7 +12,9 @@ class TypeData(StrEnum):
     INT = "int"
     FLOAT = "float"
     STR = "str"
-    DATE = "date"
+    DATE = "date" # Date au format YYYY-MM-DD
+    TIME = "time"# Time au format HH:mm:ss:ms
+    DATETIME = "datetime" # Datetime au format YYYY-MM-DD HH:mm:ss:ms
     LIST = "list"
     DICT = "dict"
     
