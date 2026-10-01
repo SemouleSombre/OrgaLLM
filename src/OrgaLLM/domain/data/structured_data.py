@@ -34,12 +34,21 @@ class StructuredData(BaseModel):
     def get_type(self) -> TypeData:
         return self.type
     
-    def __init__(self, format:Union[str, Dict[str,str]]) -> None:
+    def __init__(self, format:Dict[str,Any]) -> None:
         if not format:
             raise ValueError
-        elif type(format) == str:
-            "cas str"
         elif type(format) == dict:
             "cas dict"
         else:
             raise ValueError
+        
+    def structured_data_from_dict(self, format:Dict[str,Any]) -> None:
+        
+        if len(format) < 1:
+            self.name = "output"
+            self.type = TypeData.STR            
+        
+        elif len(format) == 1:
+            self.name = format.keys[0]
+        
+        return 
