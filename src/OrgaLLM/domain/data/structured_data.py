@@ -48,7 +48,8 @@ class StructuredData(BaseModel):
             self.name = "output"
             self.type = TypeData.STR            
         
-        elif len(format) == 1:
-            self.name = format.keys[0]
+        else:
+            for key, value in format:
+                pass
         
         return 
