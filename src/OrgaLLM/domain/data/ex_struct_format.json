@@ -1,0 +1,22 @@
+{
+  "name":"Identité",
+  "type": "dict",
+  "format": {
+    "nom": {"type": "str"},
+    "age": {"type": "int"},
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "created_at": {"type": "string", "format": "date-time"},
+        "is_active": {"type": "boolean"},
+        "tags": {"type": "array", "items": {}}}
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {"type": "string"},
+        "zip": {"type": "string"}
+      }
+    }
+  }
+}

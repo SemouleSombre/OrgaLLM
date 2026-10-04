@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import logging
-from typing import Dict, Any, Optional, Union
+from typing import Dict, Any, List, Union
 from pydantic import BaseModel
 from enum import StrEnum
 from pydantic import Field
@@ -18,38 +20,40 @@ class TypeData(StrEnum):
     LIST = "list"
     DICT = "dict"
     
-
 class StructuredData(BaseModel):
+    key: str = Field(..., description="Nom de la donnée")
+    value: TypeData = Field(..., description="Type de la colonne (ex: int, str, date)")
+    
+    def __init__(self, key:str, value:Union[str, TypeData]) -> None:
+        self.key = key
+        self.value = value if isinstance(value, TypeData) else TypeData(value)
+            
+class StructuredFormat(BaseModel):
     """Modèle représentant une colonne de table"""
-    name: str = Field(..., description="Nom de la donnée")
-    type: TypeData = Field(..., description="Type de la colonne (ex: int, str, date)")
-    # defaut: Optional[str] = Field(default=None, description="Valeur par défaut")
-    # regles: Dict[str, Any] = Field(default_factory=dict, description="Règles de validation en lecture")
-    # prompt: Optional[str] = Field(default=None, description="UUID de la clé étrangère pour le prompt")
-    # optionnel: bool = Field(default=False, description="Indique si la colonne est optionnelle")
+    name: str
+    structure: List[Union[StructuredData, StructuredFormat]] = Field(default_factory = List, description="List of all output")
     
-    def get_name(self) -> str:
-        return self.name
+    def __init__(self, format:Dict[str, Any]) -> None:
+        pass
     
-    def get_type(self) -> TypeData:
-        return self.type
+    def get_structure(self) -> List[StructuredData | StructuredFormat]:
+        return self.structure
     
-    def __init__(self, format:Dict[str,Any]) -> None:
-        if not format:
-            raise ValueError
-        elif type(format) == dict:
-            "cas dict"
-        else:
-            raise ValueError
+    
+class ListStructuredFormat(BaseModel):
+    structured_formats = List[StructuredFormat]
+    
+    def __init__(self) -> None:
+        self.structured_formats = []
         
-    def structured_data_from_dict(self, format:Dict[str,Any]) -> None:
+    def add_structure(self, format:Dict[str, Any]) -> Union[StructuredData | StructuredFormat]:
         
-        if len(format) < 1:
-            self.name = "output"
-            self.type = TypeData.STR            
+        name:str = format.get("name", "")
+        kind:str = format.get("type", "")
+        structure:Dict[str, Any] = format.get("format", {})
         
-        else:
-            for key, value in format:
-                pass
+        if not name:
+            raise ValueError("Name not defined")
         
-        return 
+        
+        pass
