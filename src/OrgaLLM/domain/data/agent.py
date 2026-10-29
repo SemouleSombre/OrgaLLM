@@ -3,7 +3,7 @@ from typing import Any, Optional, Literal, List, Dict, Callable
 from pydantic import BaseModel, Field
 from enum import StrEnum
 
-from .structured_data import StructuredData
+from .structured_data.structured_data import StructuredData
 from .prompt import Prompt
 
 logger = logging.getLogger(__name__)
@@ -41,4 +41,8 @@ class LLMAgent(BaseAgent):
     
 class LLMAgentStructured(LLMAgent):
     type: TypeAgent = TypeAgent.LLMStructured
-    parser: StructuredData = Field(..., description="Parser (Format de sortie) de réponse de l'assistant")
+    prompt_parser: str
+    parser: List[StructuredData] = Field(..., description="Parser (Format de sortie) de réponse de l'assistant")
+    
+    def __init__(self, ) -> None:
+        pass
