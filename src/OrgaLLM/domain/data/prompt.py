@@ -3,10 +3,9 @@ import logging
 from typing import List, Dict, Any
 from pydantic import BaseModel
 
-logger = logging.getLogger(__name__)
+from ...core.tool import extract_variables
 
-def extract_variables(prompt:str) -> List[str]:
-    return re.findall(r'\{([a-zA-Z]+[a-zA-Z1-9]*?)\}', prompt)
+logger = logging.getLogger(__name__)
 
 class Prompt(BaseModel):
     prompt_system:str

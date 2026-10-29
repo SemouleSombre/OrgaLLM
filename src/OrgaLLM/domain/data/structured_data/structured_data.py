@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import json, yaml
 import logging
 from typing import Dict, Any, List, Union
 from pydantic import BaseModel
 from enum import StrEnum
 from pydantic import Field
+
+from ....core.tool import if_file_exist
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +28,60 @@ class StructuredData(BaseModel):
     key: str = Field(..., description="Nom de la donnée")
     kind:TypeData = Field(..., description="Type de la donnée")
     value:Any = Field(..., description="Valeur de la donnée sélectionnée")
-    metadata:Dict[str, Any] = Field()
+    metadata:Dict[str, Any] = Field() 
+    
+    @classmethod
+    def from_json(cls,
+                  input:str) -> "StructuredData":
+        if not (isinstance(input, str) 
+                and if_file_exist(input)):
+            logger.error(f"File {input} does not exist")
+            raise ValueError
+        
+        with open('src/OrgaLLM/domain/data/ex_struct_format.json', 'r') as file:
+            json_docs = json.load(file)
+
+        return cls.from_dict(json_docs)
+    
+    @classmethod
+    def from_yaml(cls,
+                  input:str) -> "StructuredData":
+        if not (isinstance(input, str) 
+                and if_file_exist(input)):
+            logger.error(f"File {input} does not exist")
+            raise ValueError
+        
+        with open('src/OrgaLLM/domain/data/ex_struct_format.yaml', 'r') as file:
+            yaml_docs = yaml.safe_load_all(file)
+
+            yaml_doc = next(yaml_docs)
+            return cls.from_dict(yaml_doc)
+                
+    
+    @classmethod
+    def from_dict(cls,
+                  input:Union[Dict[str, Any],
+                              List[Dict[str, Any]]
+                              ]) -> "StructuredData":
+        
+        if isinstance(input, Dict):
+            for key, value in input:
+                pass
+        elif isinstance(input, List):
+            pass
+        else:
+            logger.error(f"Format of {input} not exist")
+            raise ValueError
+        
+        
+        me = cls({})
+        return me
+    
+    def __init__(self, input:Dict[str, Any]) -> None:
+        pass
+    
+    
+        
     
 class BoolData(StructuredData):
     kind:TypeData = TypeData.BOOL

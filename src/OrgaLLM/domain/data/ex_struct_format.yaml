@@ -1,0 +1,29 @@
+nom: Inscription
+type: dict
+format:
+  - nom: Nom
+    type: str
+  - nom: age
+    type: int
+  - nom: taille
+    type: float
+  - nom: date de naissance
+    type: date
+  - nom: enfants
+    type: list
+    format: str
+  - nom: date et heure d'inscription
+    type: datetime
+  - nom: heure de naissance
+    type: time
+  - nom: num tel
+    type: list
+    format:
+      - nom: téléphone
+        type: choix
+        choix:
+          - maison
+          - portable
+          - entreprise
+      - nom: numéro
+        type: str

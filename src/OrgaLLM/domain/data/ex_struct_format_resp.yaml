@@ -1,0 +1,15 @@
+Inscription:
+  Nom: Jacques
+  age: 45
+  taille: 1.76
+  date de naissance: 14/02/65
+  enfants:
+    - Solène
+    - Eloïse
+  date et heure d'inscription: '21/12/26 10:15:53'
+  heure de naissance: '02:53:10'
+  num tel:
+    - téléphone: maison
+      numéro: '0202020202'
+    - téléphone: portable
+      numéro: '0606060606'
